@@ -61,7 +61,7 @@ create table tbl_apontamento(
 
 /*
 É necessário fazer uma alteração na tabela usuario,
-A coluna 'location' está como um varchar (12)
+coluna 'location' está como um varchar (12)
 e precisa ser alterada para um varchar (15)
 */
 
