@@ -2,36 +2,38 @@ create database buscafe;
 use buscafe;
 
 create table tbl_tipoUsuario(
-	id int auto_increment primary key,
-    tipo varchar(15) not null,
-    descricao text
+	id            int auto_increment primary key,
+    	tipo          varchar(15) not null,
+    	descricao     text
 );
 
 insert into tbl_tipoUsuario(tipo, descricao) VALUES 
 	("Comum", "Usuario padrao"),
-    ("Corporativo", "Usuario com fim corporativo");
+    	("Corporativo", "Usuario com fim corporativo");
 
+#DISUSE
 create table tbl_descricaoEstatus(
-	id int auto_increment primary key,
-	descricao text
+	id            int auto_increment primary key,
+	descricao     text
 );
 
 insert into tbl_descricaoEstatus(descricao) VALUES 
 	("Desativada"),
-    ("Ativa"),
-    ("Suspensa");
+    	("Ativa"),
+    	("Suspensa");
 
 create table tbl_usuario(
 	id            int auto_increment primary key,
-    nome          varchar(50) not null,
-    email         varchar(50) not null unique,
-    senha         varchar(50) not null,
+    	nome          varchar(50) not null,
+    	email         varchar(50) not null unique,
+    	senha         varchar(50) not null,
 	location      varchar(15) not null,
-    dtCria        datetime not null,
-    FK_id_uTipo   int,
+    	dtCria        datetime not null,
+    	FK_id_uTipo   int,
 	FK_uStatus    int,
-    CONSTRAINT FK_id_uTipo FOREIGN KEY(FK_id_uTipo) REFERENCES tbl_tipoUsuario(id),
-    CONSTRAINT FK_uStatus FOREIGN KEY(FK_uStatus) REFERENCES tbl_descricaoEstatus(id)
+	
+    	CONSTRAINT FK_id_uTipo FOREIGN KEY(FK_id_uTipo) REFERENCES tbl_tipoUsuario(id),
+    	CONSTRAINT FK_uStatus FOREIGN KEY(FK_uStatus) REFERENCES tbl_descricaoEstatus(id)
 );
 
 INSERT INTO tbl_usuario(nome, email, senha, location, dtCria, FK_id_uTipo, FK_uStatus) VALUES
@@ -55,20 +57,22 @@ create table tbl_apontamento(
 ); */
 
 create table tbl_doc(
-	id int auto_increment primary key,
-    cpf varchar(14) not null,
-	cnpj varchar(18) not null
+	id int        auto_increment primary key,
+    	cpf           varchar(14) not null,
+	cnpj          varchar(18) not null
 );
 INSERT INTO tbl_doc(cpf, cnpj) VALUES('453.945.408-02', '00.000.000/0000-00');
 INSERT INTO tbl_doc(cpf, cnpj) VALUES('000.000.000-00', '11.111.111/1111-11');
 
+
 create table tbl_corp(
-	id int auto_increment primary key,
-    FK_id_usuario int,
-    FK_id_doc int,
-    rSocial varchar(50) not null,
-    cordenada varchar(150) not null,
-    CONSTRAINT FK_id_usuario FOREIGN KEY(FK_id_usuario) REFERENCES tbl_usuario(id),
+	id            int auto_increment primary key,
+    	FK_id_usuario int,
+    	FK_id_doc     int,
+    	rSocial       varchar(50) not null,
+    	cordenada     varchar(150) not null,
+	
+    	CONSTRAINT FK_id_usuario FOREIGN KEY(FK_id_usuario) REFERENCES tbl_usuario(id),
 	CONSTRAINT FK_id_doc FOREIGN KEY(FK_id_doc) REFERENCES tbl_doc(id)
 );
 
